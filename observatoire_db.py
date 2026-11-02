@@ -3,9 +3,8 @@ from pydantic import BaseModel
 import requests
 from requests.exceptions import RequestException
 
-# ==========================================
-# 1. MODÈLES PYDANTIC (Rappel Jour 1)
-# ==========================================
+
+# MODÈLES PYDANTIC (Rappel Jour 1)
 class CurrentWeather(BaseModel):
     time: str
     temperature_2m: float
@@ -17,9 +16,9 @@ class WeatherResponseModel(BaseModel):
     current: CurrentWeather
 
 
-# ==========================================
-# 2. CLIENT API (Rappel Jour 1)
-# ==========================================
+
+# CLIENT API (Rappel Jour 1)
+
 def fetch_weather_data(lat: float, lon: float) -> dict:
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
@@ -33,9 +32,9 @@ def fetch_weather_data(lat: float, lon: float) -> dict:
         return response.json()
 
 
-# ==========================================
-# 3. GESTION DE LA BASE DE DONNÉES SQLITE
-# ==========================================
+
+#  GESTION DE LA BASE DE DONNÉES SQLITE
+
 DB_NAME = "meteo_observatoire.db"
 
 def init_database():
@@ -73,7 +72,7 @@ def save_weather_to_db(nom_ville: str, lat: float, lon: float, weather_data: Wea
     with sqlite3.connect(DB_NAME) as conn:
         cursor = conn.cursor()
         
-        # 1. Insertion ou récupération de l'ID de la ville (INSERT OR IGNORE + SELECT)
+        #  Insertion ou récupération de l'ID de la ville (INSERT OR IGNORE + SELECT)
         cursor.execute("""
             INSERT OR IGNORE INTO villes (nom, latitude, longitude)
             VALUES (?, ?, ?)
@@ -82,7 +81,7 @@ def save_weather_to_db(nom_ville: str, lat: float, lon: float, weather_data: Wea
         cursor.execute("SELECT id FROM villes WHERE nom = ?", (nom_ville,))
         ville_id = cursor.fetchone()[0]
         
-        # 2. Insertion du relevé météo validé par Pydantic
+        #  Insertion du relevé météo validé par Pydantic
         cursor.execute("""
             INSERT INTO releves (ville_id, temperature, vitesse_vent, date_heure)
             VALUES (?, ?, ?, ?)
@@ -111,9 +110,9 @@ def get_recent_releves():
         return cursor.fetchall()
 
 
-# ==========================================
-# 4. EXÉCUTION DU PIPELINE GLOBAL (JOUR 1 + JOUR 2)
-# ==========================================
+
+#  EXÉCUTION GLOBAL (JOUR 1 + JOUR 2)
+# 
 if __name__ == "__main__":
     # Initialisation de la base
     init_database()

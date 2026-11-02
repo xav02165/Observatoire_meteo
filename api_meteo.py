@@ -2,9 +2,8 @@ from pydantic import BaseModel, ValidationError
 import requests
 from requests.exceptions import RequestException
 
-# ==========================================
-# 1. DÉFINITION DES MODÈLES PYDANTIC
-# ==========================================
+
+#  DÉFINITION DES MODÈLES PYDANTIC
 # Open-Meteo renvoie un dictionnaire imbriqué. On structure
 # nos modèles pour correspondre exactement à ce format JSON.
 
@@ -19,9 +18,9 @@ class WeatherResponseModel(BaseModel):
     current: CurrentWeather
 
 
-# ==========================================
-# 2. FONCTION DE REQUÊTE HTTP ROBUSTE
-# ==========================================
+
+#  FONCTION DE REQUÊTE HTTP 
+
 def fetch_weather_data(lat: float, lon: float) -> dict:
     """
     Interroge l'API Open-Meteo avec une gestion rigoureuse des erreurs réseau.
@@ -36,13 +35,13 @@ def fetch_weather_data(lat: float, lon: float) -> dict:
     # Utilisation d'un bloc 'with requests.Session()' pour optimiser les connexions HTTP
     try:
         with requests.Session() as session:
-            # Timeout de 10 secondes pour éviter de bloquer indéfiniment
+            # Timeout de 10 secondes pour éviter de bloquer 
             response = session.get(url, params=params, timeout=10)
             
             # Vérifie si le code de statut indique une erreur (4xx ou 5xx)
             response.raise_for_status()
             
-            # Retourne les données sous forme de dictionnaire Python brut
+            # Retourne les données sous forme de dictionnaire Python 
             return response.json()
 
     except requests.exceptions.Timeout:
@@ -56,9 +55,9 @@ def fetch_weather_data(lat: float, lon: float) -> dict:
         raise
 
 
-# ==========================================
-# 3. EXÉCUTION DU SCRIPT (PIPELINE JOUR 1)
-# ==========================================
+
+#  EXÉCUTION DU SCRIPT ( JOUR 1)
+
 if __name__ == "__main__":
     # Coordonnées de Dunkerque (Latitude, Longitude)
     LATITUDE = 51.0344
@@ -67,12 +66,12 @@ if __name__ == "__main__":
     print(f" Interrogation de l'API Open-Meteo pour les coordonnées ({LATITUDE}, {LONGITUDE})...")
 
     try:
-        # Étape A : Récupération des données brutes
+        #  Récupération des données brutes
         raw_data = fetch_weather_data(LATITUDE, LONGITUDE)
         print(" Données brutes récupérées avec succès !")
 
-        # Étape B : Validation rigoureuse via Pydantic
-        # Si une clé manque ou si un type est incorrect (ex: température en string au lieu de float),
+        # Validation  via Pydantic
+        # Si une clé manque ou si un type est incorrect,
         # Pydantic lève une exception 'ValidationError'.
         validated_weather = WeatherResponseModel(**raw_data)
         
