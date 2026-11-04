@@ -27,11 +27,11 @@
 ```text
 Obervatoire_Meteo/
 │
-├── api_meteo.py         # Jour 1 & 2 : Client HTTP, Modèles Pydantic & Stockage DB SQLite
-├── main.py              # Jour 3     : API FastAPI exposant les données stockées
-├── app_streamlit.py     # Bonus      : Dashboard graphique Streamlit connecté à FastAPI
-├── meteo_observatoire.db# Base de données SQLite (générée automatiquement)
-└── README.md            # Documentation complète du projet
+├── observatoire_db.py    # Jour 1 & 2 : Client HTTP, Modèles Pydantic & Stockage DB SQLite
+├── main.py               # Jour 3     : API FastAPI exposant les données stockées
+├── app_streamlit.py      # Bonus      : Dashboard graphique Streamlit connecté à FastAPI
+├── meteo_observatoire.db # Base de données SQLite (générée automatiquement)
+└── README.md             # Documentation complète du projet
 ```
 
 ---
