@@ -1,5 +1,5 @@
 import sqlite3
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError 
 import requests
 from requests.exceptions import RequestException
 
