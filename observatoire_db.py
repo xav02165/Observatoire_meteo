@@ -17,7 +17,7 @@ class WeatherResponseModel(BaseModel):
 
 
 
-# CLIENT API (Rappel Jour 1)
+# CLIENT API ( Jour 1)
 
 def fetch_weather_data(lat: float, lon: float) -> dict:
     url = "https://api.open-meteo.com/v1/forecast"
