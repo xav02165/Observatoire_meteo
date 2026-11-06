@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field
 
-# --- Modèles d'ingestion depuis Open-Meteo ---
+# --- Modèles ---
 class CurrentWeather(BaseModel):
     temperature: float
     windspeed: float = Field(..., alias="windspeed")
@@ -13,7 +13,7 @@ class WeatherResponseModel(BaseModel):
     longitude: float
     current_weather: CurrentWeather
 
-# --- Modèles de réponse pour FastAPI ---
+# --- Modèles FastAPI ---
 class ReleveResponse(BaseModel):
     ville: str
     temperature: float
