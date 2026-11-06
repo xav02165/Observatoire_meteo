@@ -3,7 +3,7 @@ from src.services import fetch_and_store_weather_by_city
 
 def main():
   print("==========================================")
-  print("  L'OBSERVATOIRE MÉTÉO - RECHERCHE LIBRE ")
+  print(" ------- L'OBSERVATOIRE MÉTÉO ----------- ")
   print("==========================================")
 
   ville = input(" Entrez le nom d'une ville : ").strip()
