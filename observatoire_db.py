@@ -194,5 +194,5 @@ if __name__ == "__main__":
             ville, temp, vent, heure = row
             print(f"   - [{heure}] {ville} : {temp} °C, Vent : {vent} km/h")
 
-    except Exception as e:
-        print(f" Une erreur est survenue : {e}")
+    except Exception as excp:
+        print(f" Une erreur est survenue : {excp}")
