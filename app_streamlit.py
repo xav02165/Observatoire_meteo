@@ -7,7 +7,7 @@ st.set_page_config(
     page_title="L'Observatoire Météo", page_icon="", layout="centered"
 )
 
-st.title(" L'Observatoire Météo")
+st.title(" L'Observatoire Météo par Xavier")
 st.markdown("Tableau de bord interactif connecté à notre propre API FastAPI.")
 
 # Barre de recherche de ville

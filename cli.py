@@ -22,10 +22,10 @@ def main():
     print(f" Vitesse du vent : {weather.windspeed} km/h")
     print(f" Date et heure : {weather.time}")
 
-  except ValueError as ve:
-    print(f" Erreur : {ve}")
-  except Exception as e:
-    print(f" Une erreur inattendue est survenue : {e}")
+  except ValueError as verror:
+    print(f" Erreur : {verror}")
+  except Exception as excp:
+    print(f" Une erreur inattendue est survenue : {excp}")
 
 
 if __name__ == "__main__":
